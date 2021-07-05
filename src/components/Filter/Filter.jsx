@@ -6,10 +6,10 @@ import s from './Filter.module.css'
 const Filter = () => {
 
     return (
-        <div> 
+        <div>
             <p>Find contacts by name</p>
             <label>
-                <input></input>
+                <input type="text" value={this.state.filter}></input>
             </label>
         </div>
     )

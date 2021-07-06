@@ -2,29 +2,24 @@ import React, { Component } from 'react';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
+import s from './App.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-// const contactsArr = [
-//   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-//   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-//   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-//   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-// ]
+const contactsArr = [
+  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+]
 
 class App extends Component {
 
   state = {
-    contacts: [
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
-
-    ],
+    contacts: contactsArr,
     filtered: ''
   }
 
   formSubmithandler = (formData) => {
-
-    // const hhh = this.state.contacts.some(contact => contact.name === formData.name ? console.log('ll') : console.log('kk'));
 
     if (this.state.contacts.some(contact => contact.name === formData.name))
     {
@@ -41,17 +36,6 @@ class App extends Component {
       ))
     };
 
-    // console.log(this.state.contacts.some(contact => contact.name === formData.name))
-
-    // const addContact = { ...formData, id: uuidv4() };
-
-    // this.setState(prevState => ({
-
-    //   contacts: [addContact, ...prevState.contacts]
-
-    // }
-    // ))
-
   }
 
   deleteContact = contactId => {
@@ -66,11 +50,7 @@ class App extends Component {
     })
   }
 
-
-
   render() {
-
-
 
     const filteredContactToLowerCase = this.state.filtered.toLocaleLowerCase();
 
@@ -79,20 +59,18 @@ class App extends Component {
     )
 
     return (
-      <>
-        <h1>Phonebook</h1>
+      <div className={s.container}>
+        <h1 className={s.title}>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmithandler} />
-        <h2>Contacts</h2>
+        <h2 className={s.title}>Contacts</h2>
         <Filter value={this.state.filtered} onChange={this.filtеredValue} />
         <ContactList
           contactsArr={filteredContactList}
           onDeleteContact={this.deleteContact}
         />
-      </>
+      </div>
     );
   }
 }
-
-
 
 export default App;

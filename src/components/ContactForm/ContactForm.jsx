@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import s from './ContactForm.module.css';
 import { v4 as uuidv4 } from 'uuid';
-// console.log(s);
+import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
 
@@ -33,8 +33,11 @@ class ContactForm extends Component {
     };
 
     render() {
+
+        const numberInputId = uuidv4();
+        const nameInputId = uuidv4();
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className={s.form}>
                 <span>Name</span>
                 <label className={s.formItem}>
                     <input
@@ -46,9 +49,10 @@ class ContactForm extends Component {
                         required
                         onChange={this.handleChange}
                         value={this.state.name}
+                        id={nameInputId}
                     />
                 </label>
-                <span>Number</span>
+                <span className={s.number}>Number</span>
                 <label className={s.formItem}>
                     <input
                         autoComplete="off"
@@ -59,13 +63,18 @@ class ContactForm extends Component {
                         required
                         onChange={this.handleChange}
                         value={this.state.number}
-
+                        id={numberInputId}
                     />
                 </label>
-                <button type="submit">Add contact</button>
+                <button type="submit" className={s.btn}>Add contact</button>
             </form>
         )
     }
+
+}
+
+ContactForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
 
 }
 

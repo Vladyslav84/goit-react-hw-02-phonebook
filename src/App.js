@@ -16,7 +16,7 @@ class App extends Component {
   state = {
     contacts: [
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
 
     ],
     filtered: ''
@@ -24,15 +24,33 @@ class App extends Component {
 
   formSubmithandler = (formData) => {
 
-    console.log(this.state.contacts.some(contact =>contact.name === formData.name))
+    // const hhh = this.state.contacts.some(contact => contact.name === formData.name ? console.log('ll') : console.log('kk'));
 
-    const addContact = { ...formData, id: uuidv4() };
+    if (this.state.contacts.some(contact => contact.name === formData.name))
+    {
+      alert(`${ formData.name } is already in contacts`)
+    } else
+    {
+      const addContact = { ...formData, id: uuidv4() };
 
-    this.setState(prevState => ({
+      this.setState(prevState => ({
 
-      contacts: [addContact, ...prevState.contacts]
+        contacts: [addContact, ...prevState.contacts]
 
-    }))
+      }
+      ))
+    };
+
+    // console.log(this.state.contacts.some(contact => contact.name === formData.name))
+
+    // const addContact = { ...formData, id: uuidv4() };
+
+    // this.setState(prevState => ({
+
+    //   contacts: [addContact, ...prevState.contacts]
+
+    // }
+    // ))
 
   }
 
@@ -43,12 +61,12 @@ class App extends Component {
   };
 
   filtеredValue = evt => {
-      this.setState({
+    this.setState({
       filtered: evt.currentTarget.value
     })
   }
 
-  
+
 
   render() {
 
@@ -65,7 +83,7 @@ class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmithandler} />
         <h2>Contacts</h2>
-        <Filter value={this.state.filtered} onChange={this.filtеredValue}/>
+        <Filter value={this.state.filtered} onChange={this.filtеredValue} />
         <ContactList
           contactsArr={filteredContactList}
           onDeleteContact={this.deleteContact}

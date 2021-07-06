@@ -16,13 +16,15 @@ class App extends Component {
   state = {
     contacts: [
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
+      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
 
     ],
-    filter: ''
+    filtered: ''
   }
 
   formSubmithandler = (formData) => {
+
+    console.log(this.state.contacts.some(contact =>contact.name === formData.name))
 
     const addContact = { ...formData, id: uuidv4() };
 
@@ -40,23 +42,39 @@ class App extends Component {
     }))
   };
 
+  filtеredValue = evt => {
+      this.setState({
+      filtered: evt.currentTarget.value
+    })
+  }
+
+  
+
   render() {
 
-    // const contactsArr = this.state.contacts;
+
+
+    const filteredContactToLowerCase = this.state.filtered.toLocaleLowerCase();
+
+    const filteredContactList = this.state.contacts.filter(contact =>
+      contact.name.toLocaleLowerCase().includes(filteredContactToLowerCase),
+    )
 
     return (
       <>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmithandler} />
         <h2>Contacts</h2>
-        <Filter />
+        <Filter value={this.state.filtered} onChange={this.filtеredValue}/>
         <ContactList
-          contactsArr={this.state.contacts}
+          contactsArr={filteredContactList}
           onDeleteContact={this.deleteContact}
         />
       </>
     );
   }
 }
+
+
 
 export default App;

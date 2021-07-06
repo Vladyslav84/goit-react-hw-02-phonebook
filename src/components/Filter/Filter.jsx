@@ -3,13 +3,13 @@ import s from './Filter.module.css'
 
 // console.log(s);
 
-const Filter = () => {
+const Filter = ({value,onChange}) => {
 
     return (
         <div>
             <p>Find contacts by name</p>
             <label>
-                <input type="text" value={this.state.filter}></input>
+                <input type="text" value={value} onChange={onChange}></input>
             </label>
         </div>
     )

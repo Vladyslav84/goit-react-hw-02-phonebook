@@ -12,8 +12,6 @@ import { v4 as uuidv4 } from 'uuid';
 //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 // ]
 
-console.log(null === true);
-
 class App extends Component {
 
   state = {
